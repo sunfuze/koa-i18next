@@ -26,6 +26,10 @@
     "tap": "tap-spec",
     "timeout": "5s"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sunfuze/koa-i18next.git"
+  },
   "devDependencies": {
     "ava": "^0.15.2",
     "babel-preset-es2015-rollup": "^1.1.1",
