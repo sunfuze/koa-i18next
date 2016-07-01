@@ -1,0 +1,48 @@
+{
+  "name": "koa-i18next",
+  "version": "0.1.0",
+  "description": "koa middleware for i18next",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "ava | tap-spec",
+    "watch:test": "ava --watch | tap-spec",
+    "build": "NODE_ENV=production rollup -c",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "i18n",
+    "i18next",
+    "koa",
+    "middleware"
+  ],
+  "author": "sunfuze <sunfuze.1989@gmail.com>",
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "tap": "tap-spec",
+    "timeout": "5s"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-register": "^6.9.0",
+    "babelrc-rollup": "^1.1.0",
+    "i18next": "^3.3.1",
+    "i18next-sync-fs-backend": "^0.1.0",
+    "koa": "^1.2.0",
+    "koa-router": "^5.4.0",
+    "koa-session": "^3.3.1",
+    "rollup-plugin-babel": "^2.5.1",
+    "supertest": "^1.2.0",
+    "tap-spec": "^4.1.1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "koa-convert": "^1.2.0"
+  }
+}
