@@ -15,6 +15,7 @@ const Backend = require('i18next-sync-fs-backend') // or i18next-node-fs-backend
 const koaI18next = require('koa-i18next')
 
 i18next
+  .use(Backend)
   .init({
     backend: {
       // translation resources
