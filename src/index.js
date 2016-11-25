@@ -60,8 +60,8 @@ function setLanguage (context, lng, options = {}) {
     , lookupPath
     , lookupSession
   } = options
-
   context.locals = Object.assign(context.locals || {}, {lng})
+  context.state = Object.assign(context.state || {}, {lng})
   context.language = context.lng = lng
   context.set('content-language', lng)
   if (lookupCookie) {
