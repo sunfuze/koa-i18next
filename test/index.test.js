@@ -2,7 +2,7 @@ import http from 'http'
 import test from 'ava'
 import agent from 'supertest'
 import path from 'path'
-import koa from 'koa'
+import Koa from 'koa'
 import Router from 'koa-router'
 import session from 'koa-session'
 import i18next from 'i18next'
@@ -27,7 +27,7 @@ request.agent = function (app) {
 }
 
 function appFactory (config = {}) {
-  const app = koa()
+  const app = new Koa()
   app.keys = ['abc', 'edf']
   app.use(session(app))
   app.use(i18n(i18next, Object.assign({}, defaultConfig, config)))
@@ -36,21 +36,19 @@ function appFactory (config = {}) {
   router.get('/', action)
   router.get('/zh/hello', action)
   router.get('/v1/:lng/hello', action)
-  router.get('/session', function* (next) {
-    this.status = 200
-    this.session.lng = 'zh'
-    yield* next
+  router.get('/session', async function(ctx, next) {
+    ctx.status = 200
+    ctx.session.lng = 'zh'
+    await next()
   })
   app.use(router.routes())
   return app
 }
 
-function* action(next) {
-  debug('request url:', this.url)
-  debug('request params:', this.params)
-  this.status = 200
-  this.body = { message: this.t('hello') }
-  yield* next
+async function action(ctx, next) {
+  ctx.status = 200
+  ctx.body = { message: ctx.t('hello') }
+  await next()
 }
 
 test.before('init i18next', t => {
