@@ -1,36 +1,28 @@
-import convert from 'koa-convert'
 import detect from './detect'
 
 const debug = require('debug')('koa:i18next')
 
 export default function (i18next, options = {}) {
 
-  if (options.next) {
-    return convert(middleware)
-  } else {
-    return middleware
-  }
-
-  function* middleware(next) {
-    this.i18next = i18next
+  return async function koaI18next(ctx, next) {
+    ctx.i18next = i18next
     let {
       lookupCookie,
       lookupSession
     } = options
 
-    let lng = detect(this, options)
-    lng && setLanguage(this, lng, options)
+    let lng = detect(ctx, options)
+    lng && setLanguage(ctx, lng, options)
 
     debug('language is', lng)
 
-    const context = this
-    this.t = function (...args) {
+    ctx.t = function (...args) {
       let key
       let opts
       // do detect path
       if (!lng && isDetectPath(options.order)) {
-        lng = detect(context, Object.assign(options, {order: ['path']}))
-        lng && setLanguage(context, lng, options)
+        lng = detect(ctx, Object.assign(options, {order: ['path']}))
+        lng && setLanguage(ctx, lng, options)
       }
 
       if (args.length === 1) {
@@ -46,7 +38,7 @@ export default function (i18next, options = {}) {
       return i18next.t.apply(i18next, args)
     }
 
-    yield * next
+    await next()
   }
 }
 
