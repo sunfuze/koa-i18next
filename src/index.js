@@ -57,7 +57,7 @@ function setLanguage (context, lng, options = {}) {
   context.language = context.lng = lng
   context.set('content-language', lng)
   if (lookupCookie) {
-    context.cookies.set(lookupCookie, lng)
+    context.cookies.set(lookupCookie, lng, { httpOnly: false });
   }
   if (lookupSession && context.session) {
     context.session[lookupSession] = lng
