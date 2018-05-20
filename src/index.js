@@ -2,9 +2,9 @@ import detect from './detect'
 
 const debug = require('debug')('koa:i18next')
 
-export default function (i18next, options = {}) {
+export default function koaI18next(i18next, options = {}) {
 
-  return async function koaI18next(ctx, next) {
+  return async function i18nextMiddleware(ctx, next) {
     ctx.i18next = i18next
     let {
       lookupCookie,
@@ -57,7 +57,7 @@ function setLanguage (context, lng, options = {}) {
   context.language = context.lng = lng
   context.set('content-language', lng)
   if (lookupCookie) {
-    context.cookies.set(lookupCookie, lng, { httpOnly: false });
+    context.cookies.set(lookupCookie, lng, { httpOnly: false, signed: false });
   }
   if (lookupSession && context.session) {
     context.session[lookupSession] = lng

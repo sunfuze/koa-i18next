@@ -152,7 +152,7 @@ test.cb('wiil set cookie', t => {
   request(app)
     .get('/v1/zh/hello')
     .set('Accept-Language', 'zh')
-    .expect('set-cookie', 'i18next=zh; path=/; httponly')
+    .expect('set-cookie', 'i18next=zh; path=/;')
     .expect(200, {
       message: '你好'
     }, t.end)
