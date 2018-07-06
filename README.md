@@ -90,6 +90,8 @@ this.t('balabala', options)
 
 
 ## Resources middleware
+> inspired by i18next-express-middleware
+
 If needed, you can serve the translations with the resources middleware.  
 As Koa doesn't come with built-in routing system, you'll have to handle the request path matching by a routing library or by specifying a path in the options.
 
@@ -121,6 +123,8 @@ Available options (with default) are :
 ```
 
 ## Missing Keys middleware
+> inspired by i18next-express-middleware
+
 You can handle missing keys with the Missing Keys middleware. It'll need the `bodyparser` in order to get the submitted missing translations.
 
 ```javascript

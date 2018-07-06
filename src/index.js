@@ -69,7 +69,7 @@ koaI18next.getResourcesHandler = function (i18next, options) {
     if (options.path && ctx.path !== options.path) {
       return await next();
     }
-    if (!i18next.services.backendConnector) return ctx.throw(404, "i18next-express-middleware:: no backend configured");
+    if (!i18next.services.backendConnector) return ctx.throw(404, "koa-i18next-middleware:: no backend configured");
 
     let resources = {};
 
@@ -112,7 +112,7 @@ koaI18next.getMissingKeyHandler = function (i18next, options) {
     let lng = ctx[propertyParam][options.lngParam || "lng"];
     let ns = ctx[propertyParam][options.nsParam || "ns"];
 
-    if (!i18next.services.backendConnector) return ctx.throw(404, "i18next-express-middleware:: no backend configured");
+    if (!i18next.services.backendConnector) return ctx.throw(404, "koa-i18next-middleware:: no backend configured");
 
     for (var m in ctx.request.body) {
       i18next.services.backendConnector.saveMissing([lng], ns, m, ctx.request.body[m]);
