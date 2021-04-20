@@ -1,3 +1,6 @@
+# This repo is *deprecated*, please use [koa-i18next-middleware](https://github.com/lxzxl/koa-i18next-middleware).
+
+
 # Introduction
 A middleware to use i18next in koajs.
 
